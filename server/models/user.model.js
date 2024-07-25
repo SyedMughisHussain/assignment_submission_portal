@@ -13,11 +13,10 @@ const userSchema = new Schema(
       required: true,
       minlength: 8,
     },
-    confirmPassword: {
+    role: {
       type: String,
-      required: true,
-    },
-    role: String,
+      default: "student"
+    }
   },
   {
     timestamps: true,

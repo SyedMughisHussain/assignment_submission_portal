@@ -30,6 +30,7 @@ const signUpUser = async (req, res) => {
     const payload = {
       ...req.body,
       role: "student",
+      password: hashPassword
     };
 
     const user = await User.create(payload);
