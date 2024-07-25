@@ -1,15 +1,28 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken"
 
 const signUpUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password, rollNo, batch, course } = req.body;
 
+    if (!name) {
+      throw new Error("Please provide name");
+    }
     if (!email) {
       throw new Error("Please provide email");
     }
     if (!password) {
       throw new Error("Please provide password");
+    }
+    if (!rollNo) {
+      throw new Error("Please provide roll no");
+    }
+    if (!batch) {
+      throw new Error("Please provide batch");
+    }
+    if (!course) {
+      throw new Error("Please provide course");
     }
 
     const existingUser = await User.findOne({ email });
@@ -67,7 +80,7 @@ const signInUser = async (req, res) => {
       throw new Error("User not found");
     }
 
-    const checkPassword = compareSync.compare(password, user.password);
+    const checkPassword = bcrypt.compareSync(password, user.password);
     console.log("checkPassoword", checkPassword);
 
     if (checkPassword) {
