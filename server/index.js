@@ -3,7 +3,9 @@ import "dotenv/config";
 import cors from "cors";
 import connectDb from "./config/connectDb.js";
 
-import userRoutes from "./routes/user.routes.js"
+import studentRoutes from "./routes/student.routes.js"
+import teacherRoutes from "./routes/teacher.routes.js"
+import assignmentRoutes from "./routes/assignment.routes.js"
 
 const app = express();
 const port = process.env.PORT;
@@ -15,8 +17,9 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.use('/api/v1/user', userRoutes)
-
+app.use('/api/v1/user', teacherRoutes)
+app.use('/api/v1/user', studentRoutes)
+app.use('/api/v1/assignment', assignmentRoutes)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
