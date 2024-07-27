@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
 const submissionSchema = new Schema(
@@ -8,6 +8,10 @@ const submissionSchema = new Schema(
       required: true,
     },
     assignmentId: {
+      type: String,
+      required: true,
+    },
+    teacherId: {
       type: String,
       required: true,
     },
