@@ -6,24 +6,24 @@ const signUpStudent = async (req, res) => {
   try {
     const { name, email, password, rollNo, batch, course } = req.body;
 
-    if (!name) {
-      throw new Error("Please provide name");
-    }
-    if (!email) {
-      throw new Error("Please provide email");
-    }
-    if (!password) {
-      throw new Error("Please provide password");
-    }
-    if (!rollNo) {
-      throw new Error("Please provide roll no");
-    }
-    if (!batch) {
-      throw new Error("Please provide batch");
-    }
-    if (!course) {
-      throw new Error("Please provide course");
-    }
+    // if (!name) {
+    //   throw new Error("Please provide name");
+    // }
+    // if (!email) {
+    //   throw new Error("Please provide email");
+    // }
+    // if (!password) {
+    //   throw new Error("Please provide password");
+    // }
+    // if (!rollNo) {
+    //   throw new Error("Please provide roll no");
+    // }
+    // if (!batch) {
+    //   throw new Error("Please provide batch");
+    // }
+    // if (!course) {
+    //   throw new Error("Please provide course");
+    // }
 
     const existingUser = await User.findOne({ email });
 
@@ -67,12 +67,12 @@ const signInStudent = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    if (!email) {
-      throw new Error("Please provide email");
-    }
-    if (!password) {
-      throw new Error("Please provide password");
-    }
+    // if (!email) {
+    //   throw new Error("Please provide email");
+    // }
+    // if (!password) {
+    //   throw new Error("Please provide password");
+    // }
 
     const user = await User.findOne({ email });
 

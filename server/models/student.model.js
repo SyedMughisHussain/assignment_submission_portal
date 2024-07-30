@@ -22,6 +22,10 @@ const studentSchema = new Schema(
       required: true,
       unique: true
     },
+    batch: {
+      type: String,
+      required: true
+    },
     course: {
       type: String,
       required: true

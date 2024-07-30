@@ -4,17 +4,17 @@ import jwt from "jsonwebtoken"
 
 const signUpTeacher = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { fullName, email, password } = req.body;
 
-    if (!name) {
-      throw new Error("Please provide name");
-    }
-    if (!email) {
-      throw new Error("Please provide email");
-    }
-    if (!password) {
-      throw new Error("Please provide password");
-    }
+    // if (!name) {
+    //   throw new Error("Please provide name");
+    // }
+    // if (!email) {
+    //   throw new Error("Please provide email");
+    // }
+    // if (!password) {
+    //   throw new Error("Please provide password");
+    // }
 
     const existingUser = await Teacher.findOne({ email });
 
@@ -27,9 +27,9 @@ const signUpTeacher = async (req, res) => {
     const salt = bcrypt.genSaltSync(10);
     const hashPassword = bcrypt.hashSync(password, salt);
 
-    if (!hashPassword) {
-      return new Error("Something is wrong");
-    }
+    // if (!hashPassword) {
+    //   return new Error("Something is wrong");
+    // }
 
     const payload = {
       ...req.body,

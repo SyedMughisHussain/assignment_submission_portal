@@ -3,7 +3,7 @@ import { Schema } from "mongoose";
 
 const teacherSchema = new Schema(
   {
-    name: {
+    fullName: {
       type: String,
       required: true
     },
