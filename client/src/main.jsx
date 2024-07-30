@@ -4,12 +4,15 @@ import "./index.css";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import TeacherSignUp from "./pages/signup/TeacherSignUp";
+import StudentSignUp from "./pages/signup/StudentSignUp";
+import StudentSignIn from "./pages/signin/StudentSignIn";
+import TeacherSignIn from "./pages/signin/TeacherSignIn";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <TeacherSignUp />,
+    element: <TeacherSignIn />,
   },
   {
     path: "/about",
