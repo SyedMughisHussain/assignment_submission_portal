@@ -5,12 +5,13 @@ import Home from "./pages/Home";
 import TeacherSignUp from "./pages/signup/TeacherSignUp";
 import StudentSignUp from "./pages/signup/StudentSignUp";
 import SignIn from "./pages/signin/SignIn";
+import StudentDashboard from "./pages/student_dashboard/StudentDashboard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <StudentDashboard />,
   },
   {
     path: "/signupTeacher",
