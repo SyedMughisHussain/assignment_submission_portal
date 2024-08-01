@@ -24,7 +24,7 @@ const Home = () => {
             size="large"
             className="px-10 py-3 text-white bg-blue-500 rounded-md"
             onClick={() => {
-              navigate("/signupStudent");
+              navigate("/student-signup");
             }}
           >
             Register As a Student
@@ -34,7 +34,7 @@ const Home = () => {
             size="large"
             className="px-10 py-3 text-white bg-blue-500 rounded-md ml-5"
             onClick={() => {
-              navigate("/signupTeacher");
+              navigate("/teacher-signup");
             }}
           >
             Register As a Teacher
@@ -52,7 +52,7 @@ const Home = () => {
             size="large"
             className="px-10 py-3 text-white bg-blue-500 rounded-md"
             onClick={() => {
-              navigate("/login");
+              navigate("/signin");
             }}
           >
             Sign In

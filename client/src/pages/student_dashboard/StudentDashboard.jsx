@@ -1,16 +1,16 @@
 import React from "react";
 import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
-  TeamOutlined,
+  LogoutOutlined,
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
-const { Header, Content, Footer, Sider } = Layout;
+import { Routes, Route } from "react-router-dom";
+import AllAssignmentsPage from "./AllAssignmentsPage";
+
+const { Header, Content, Sider } = Layout;
+
 const siderStyle = {
   overflow: "auto",
   height: "100vh",
@@ -22,20 +22,33 @@ const siderStyle = {
   scrollbarColor: "unset",
 };
 const items = [
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  AppstoreOutlined,
-  TeamOutlined,
-  ShopOutlined,
-].map((icon, index) => ({
-  key: String(index + 1),
-  icon: React.createElement(icon),
-  label: `nav ${index + 1}`,
-}));
-const App = () => {
+  {
+    key: "1",
+    icon: <UserOutlined />,
+    label: "Dashboard",
+  },
+  {
+    key: "2",
+    icon: <VideoCameraOutlined />,
+    label: "All Assignments",
+  },
+  {
+    key: "3",
+    icon: <UploadOutlined />,
+    label: "Submissions",
+  },
+  {
+    key: "4",
+    icon: <LogoutOutlined />,
+    label: "Logout",
+  },
+];
+
+const onClick = (e) => {
+  console.log("selected", e.key);
+};
+
+const StudentDashboard = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -43,11 +56,15 @@ const App = () => {
     <Layout hasSider>
       <Sider style={siderStyle}>
         <div className="demo-logo-vertical" />
+        <h1 className="text-white font-bold p-5 text-[30px] text-center">
+          Student
+        </h1>
         <Menu
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["4"]}
           items={items}
+          onClick={onClick}
         />
       </Sider>
       <Layout
@@ -61,46 +78,15 @@ const App = () => {
             background: colorBgContainer,
           }}
         />
-        <Content
-          style={{
-            margin: "24px 16px 0",
-            overflow: "initial",
-          }}
-        >
-          <div
-            style={{
-              padding: 24,
-              textAlign: "center",
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            <p>long content</p>
-            {
-              // indicates very long content
-              Array.from(
-                {
-                  length: 100,
-                },
-                (_, index) => (
-                  <React.Fragment key={index}>
-                    {index % 20 === 0 && index ? "more" : "..."}
-                    <br />
-                  </React.Fragment>
-                )
-              )
-            }
+        <Content className="m-6">
+          <div className="bg-white p-6 min-h-screen rounded-lg shadow-md">
+            <Routes>
+              <Route path="/" element={<AllAssignmentsPage />} />
+            </Routes>
           </div>
         </Content>
-        <Footer
-          style={{
-            textAlign: "center",
-          }}
-        >
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
-        </Footer>
       </Layout>
     </Layout>
   );
 };
-export default App;
+export default StudentDashboard;
