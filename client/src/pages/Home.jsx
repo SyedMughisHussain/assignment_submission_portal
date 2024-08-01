@@ -1,11 +1,25 @@
 import { Button } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  return (
+  useEffect(() => {
+    setLoading(true); // loading state set to true while waiting for authentication check
+    if (localStorage.getItem("token")) {
+      navigate("/student-dashboard");
+      setLoading(false); // loading state set to false after successful authentication
+    } else {
+      navigate("/"); // redirect to signin page if user is not authenticated
+      setLoading(false);
+    } // check if user is authenticated and redirect to dashboard if true otherwise remain on home page
+  }, []);
+
+  return loading ? (
+    <div>Loading</div>
+  ) : (
     <div>
       <div className="flex justify-center items-center mt-10">
         <div className="p-5">

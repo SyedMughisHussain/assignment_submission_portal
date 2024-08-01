@@ -7,7 +7,9 @@ import {
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
 import { Routes, Route } from "react-router-dom";
-import AllAssignmentsPage from "./AllAssignmentsPage";
+import AllAssignments from "./AllAssignments";
+import Submissions from "./Submissions";
+import StudentProfile from "./StudentProfile";
 
 const { Header, Content, Sider } = Layout;
 
@@ -81,7 +83,9 @@ const StudentDashboard = () => {
         <Content className="m-6">
           <div className="bg-white p-6 min-h-screen rounded-lg shadow-md">
             <Routes>
-              <Route path="/" element={<AllAssignmentsPage />} />
+              <Route path="/" element={<StudentProfile />} />
+              <Route path="" element={<AllAssignments />} />
+              <Route path="" element={<Submissions />} />
             </Routes>
           </div>
         </Content>

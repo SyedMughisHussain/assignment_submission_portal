@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Button, Form, Input, InputNumber } from "antd";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const StudentSignUp = () => {
   const [loading, setLoading] = useState(false);
   const [position, setPosition] = useState("end");
+
+  const navigate = useNavigate(); 
 
   const onFinish = (values) => {
     setLoading(true);
@@ -20,6 +23,7 @@ const StudentSignUp = () => {
       })
       .then((response) => {
         console.log(response.data);
+        navigate("/signin")
       })
       .catch((err) => {
         console.log("Error:", err);

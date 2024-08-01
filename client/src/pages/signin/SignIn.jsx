@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Button, Form, Input, Select } from "antd";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const [position, setPosition] = useState("end");
+
+  const navigate = useNavigate();
 
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -18,6 +21,13 @@ const SignIn = () => {
         })
         .then((response) => {
           console.log(response.data);
+          const token = response.data.token;
+          localStorage.setItem("token", token);
+          if (response.data.user.role === "student") {
+            navigate("/student-dashboard");
+          } else {
+            navigate("/teacher-dashboard");
+          }
         })
         .catch((err) => {
           console.log("Error:", err);
