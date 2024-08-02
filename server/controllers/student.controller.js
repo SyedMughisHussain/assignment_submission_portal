@@ -1,6 +1,7 @@
-import User from "../models/student.model.js";
+// import User from "../models/student.model.js";
+import Student from "../models/student.model.js";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
 const signUpStudent = async (req, res) => {
   try {
@@ -25,7 +26,7 @@ const signUpStudent = async (req, res) => {
     //   throw new Error("Please provide course");
     // }
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await Student.findOne({ email });
 
     console.log("User", existingUser);
 
@@ -43,10 +44,10 @@ const signUpStudent = async (req, res) => {
     const payload = {
       ...req.body,
       role: "student",
-      password: hashPassword
+      password: hashPassword,
     };
 
-    const user = await User.create(payload);
+    const user = await Student.create(payload);
 
     res.status(201).json({
       user,
@@ -74,7 +75,7 @@ const signInStudent = async (req, res) => {
     //   throw new Error("Please provide password");
     // }
 
-    const user = await User.findOne({ email });
+    const user = await Student.findOne({ email });
 
     if (!user) {
       throw new Error("User not found");
@@ -88,7 +89,7 @@ const signInStudent = async (req, res) => {
         _id: user._id,
       };
       const token = jwt.sign(tokenData, process.env.TOKEN_SECRET_KEY, {
-        expiresIn: 60 * 60 * 8,
+        expiresIn: "1d",
       });
 
       res.json({
@@ -110,4 +111,25 @@ const signInStudent = async (req, res) => {
   }
 };
 
-export { signUpStudent, signInStudent };
+const getProfile = async (req, res) => {
+  try {
+    let id = req.userId;
+
+    const student = await Student.findById(id);
+
+    res.status(200).json({
+      student,
+      success: true,
+      error: false,
+      message: "Student profile retrieved successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message || error,
+      success: false,
+      error: true,
+    });
+  }
+};
+
+export { signUpStudent, signInStudent, getProfile };
