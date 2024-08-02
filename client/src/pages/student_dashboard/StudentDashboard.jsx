@@ -6,7 +6,7 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import AllAssignments from "./AllAssignments";
 import Submissions from "./Submissions";
 import StudentProfile from "./StudentProfile";
@@ -23,34 +23,50 @@ const siderStyle = {
   scrollbarWidth: "thin",
   scrollbarColor: "unset",
 };
-const items = [
-  {
-    key: "1",
-    icon: <UserOutlined />,
-    label: "Dashboard",
-  },
-  {
-    key: "2",
-    icon: <VideoCameraOutlined />,
-    label: "All Assignments",
-  },
-  {
-    key: "3",
-    icon: <UploadOutlined />,
-    label: "Submissions",
-  },
-  {
-    key: "4",
-    icon: <LogoutOutlined />,
-    label: "Logout",
-  },
-];
-
-const onClick = (e) => {
-  console.log("selected", e.key);
-};
 
 const StudentDashboard = () => {
+  const navigate = useNavigate();
+
+  const items = [
+    {
+      key: "1",
+      icon: <UserOutlined />,
+      label: "Dashboard",
+      onClick: () => {
+        navigate("/student-dashboard");
+      },
+    },
+    {
+      key: "2",
+      icon: <VideoCameraOutlined />,
+      label: "All Assignments",
+      onClick: () => {
+        navigate("/student-dashboard/all-assignments");
+      },
+    },
+    {
+      key: "3",
+      icon: <UploadOutlined />,
+      label: "Submissions",
+      onClick: () => {
+        navigate("/student-dashboard/submissions");
+      },
+    },
+    {
+      key: "4",
+      icon: <LogoutOutlined />,
+      label: "Logout",
+      onClick: () => {
+        localStorage.removeItem("token");
+        navigate("/");
+      },
+    },
+  ];
+
+  const onClick = (e) => {
+    console.log("selected", e.key);
+  };
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -84,8 +100,8 @@ const StudentDashboard = () => {
           <div className="bg-white p-6 min-h-screen rounded-lg shadow-md">
             <Routes>
               <Route path="/" element={<StudentProfile />} />
-              <Route path="" element={<AllAssignments />} />
-              <Route path="" element={<Submissions />} />
+              <Route path="/all-assignments" element={<AllAssignments />} />
+              <Route path="/submissions" element={<Submissions />} />
             </Routes>
           </div>
         </Content>

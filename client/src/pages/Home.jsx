@@ -1,20 +1,38 @@
 import { Button } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true); // loading state set to true while waiting for authentication check
+    setLoading(true);
     if (localStorage.getItem("token")) {
-      navigate("/student-dashboard");
-      setLoading(false); // loading state set to false after successful authentication
+
+      const token = localStorage.getItem("token")
+      console.log(token);
+      
+      axios
+        .get("http://localhost:3000/api/v1/user/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     } else {
-      navigate("/"); // redirect to signin page if user is not authenticated
+      navigate("/");
       setLoading(false);
-    } // check if user is authenticated and redirect to dashboard if true otherwise remain on home page
+    }
   }, []);
 
   return loading ? (

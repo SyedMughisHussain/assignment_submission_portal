@@ -23,11 +23,7 @@ const SignIn = () => {
           console.log(response.data);
           const token = response.data.token;
           localStorage.setItem("token", token);
-          if (response.data.user.role === "student") {
-            navigate("/student-dashboard");
-          } else {
-            navigate("/teacher-dashboard");
-          }
+          navigate("/student-dashboard");
         })
         .catch((err) => {
           console.log("Error:", err);
@@ -44,6 +40,9 @@ const SignIn = () => {
         })
         .then((response) => {
           console.log(response.data);
+          const token = response.data.token;
+          localStorage.setItem("token", token);
+          navigate("/teacher-dashboard");
         })
         .catch((err) => {
           console.log("Error:", err);
